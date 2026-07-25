@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Status API</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 1rem;
+            padding: 2.5rem;
+            max-width: 640px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        .badge {
+            display: inline-block;
+            background: #22c55e22;
+            color: #22c55e;
+            border: 1px solid #22c55e55;
+            border-radius: 999px;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .section-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+        }
+        .endpoint {
+            background: #0f172a;
+            border: 1px solid #1e3a5f;
+            border-radius: 0.5rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        .endpoint-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.4rem;
+        }
+        .method {
+            background: #1d4ed822;
+            color: #60a5fa;
+            border: 1px solid #1d4ed855;
+            border-radius: 0.25rem;
+            padding: 0.1rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: monospace;
+            letter-spacing: 0.05em;
+        }
+        .path {
+            font-family: monospace;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+        .desc { color: #64748b; font-size: 0.82rem; }
+        .params {
+            margin-top: 0.5rem;
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+        .param-name { color: #a78bfa; font-family: monospace; }
+        .example {
+            margin-top: 1.5rem;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem 1.25rem;
+        }
+        .example a {
+            color: #38bdf8;
+            word-break: break-all;
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+        .divider {
+            border: none;
+            border-top: 1px solid #1e293b;
+            margin: 1.5rem 0;
+        }
+        .footer { color: #475569; font-size: 0.75rem; margin-top: 1.5rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="badge">✈ Live</div>
+        <h1>Flight Status API</h1>
+        <p class="subtitle">
+            Aggregates real-time flight data from multiple providers (AeroTrack &amp; QuickFlight)
+            and returns the most recently updated status.
+        </p>
+
+        <div class="section-title">Available Endpoints</div>
+
+        <div class="endpoint">
+            <div class="endpoint-row">
+                <span class="method">GET</span>
+                <span class="path">/flights/status</span>
+            </div>
+            <div class="desc">Returns the merged flight status from all configured providers.</div>
+            <div class="params">
+                <span class="param-name">flightNumber</span> — IATA flight code (e.g. BA493) &nbsp;·&nbsp;
+                <span class="param-name">date</span> — Flight date in <code>yyyy-MM-dd</code> format
+            </div>
+        </div>
+
+        <div class="endpoint">
+            <div class="endpoint-row">
+                <span class="method">GET</span>
+                <span class="path">/health</span>
+            </div>
+            <div class="desc">Returns API health status and current UTC time.</div>
+        </div>
+
+        <hr class="divider" />
+
+        <div class="section-title">Try it</div>
+        <div class="example">
+            <a href="/flights/status?flightNumber=BA493&date=2025-08-15">
+                GET /flights/status?flightNumber=BA493&amp;date=2025-08-15
+            </a>
+        </div>
+
+        <p class="footer">
+            Running in Development &nbsp;·&nbsp; FlightStatus.Api &nbsp;·&nbsp; .NET 9
+        </p>
+    </div>
+</body>
+</html>

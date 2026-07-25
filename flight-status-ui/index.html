@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SkyRoute Flight Status Lookup — check real-time flight status by flight number and date." />
+    <title>Flight Status Lookup — SkyRoute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="page-wrapper">
+
+        <header class="app-header">
+            <div class="logo">✈ SkyRoute</div>
+            <div class="tagline">Flight Status Lookup</div>
+        </header>
+
+        <main class="main-content">
+            <section class="search-card" aria-label="Flight search form">
+                <h1 class="search-title">Check Flight Status</h1>
+                <p class="search-subtitle">Enter a flight number and date to get the latest status from our data providers.</p>
+
+                <form id="flight-form" novalidate>
+                    <div class="form-row">
+                        <div class="field-group">
+                            <label for="flightNumber" class="field-label">Flight Number</label>
+                            <input
+                                type="text"
+                                id="flightNumber"
+                                class="field-input"
+                                placeholder="e.g. BA493"
+                                autocomplete="off"
+                                spellcheck="false"
+                                maxlength="7"
+                                aria-describedby="flight-hint"
+                            />
+                            <span id="flight-hint" class="field-hint">IATA code, e.g. BA493 or LH100</span>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="date" class="field-label">Date</label>
+                            <input
+                                type="date"
+                                id="date"
+                                class="field-input"
+                                min="2020-01-01"
+                                max="2030-12-31"
+                                aria-describedby="date-hint"
+                            />
+                            <span id="date-hint" class="field-hint">Between 2020 and 2030</span>
+                        </div>
+
+                        <button type="submit" id="search-btn" class="search-btn">
+                            <span class="btn-text">Search</span>
+                            <span class="btn-spinner hidden" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+                    <div id="validation-error" class="validation-error hidden" role="alert"></div>
+                </form>
+            </section>
+
+            <div id="error-banner" class="error-banner hidden" role="alert"></div>
+
+            <section id="result" aria-live="polite" aria-label="Flight status result"></section>
+        </main>
+
+        <footer class="app-footer">
+            Data sourced from AeroTrack &amp; QuickFlight stub providers &mdash; for demonstration only.
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

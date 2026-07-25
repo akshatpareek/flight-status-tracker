@@ -1,0 +1,30 @@
+[
+  {
+    "flightCode": "BA493",
+    "status": "on-time",
+    "scheduledDep": "2025-08-15T06:00:00Z",
+    "scheduledArr": "2025-08-15T08:30:00Z",
+    "lastUpdatedUtc": "2025-08-15T05:40:00Z"
+  },
+  {
+    "flightCode": "LH100",
+    "status": "on-time",
+    "scheduledDep": "2025-08-15T07:00:00Z",
+    "scheduledArr": "2025-08-15T09:15:00Z",
+    "lastUpdatedUtc": "2025-08-15T06:50:00Z"
+  },
+  {
+    "flightCode": "EK202",
+    "status": "cancelled",
+    "scheduledDep": "2025-08-15T10:00:00Z",
+    "scheduledArr": "2025-08-15T18:30:00Z",
+    "lastUpdatedUtc": "2025-08-15T07:55:00Z"
+  },
+  {
+    "flightCode": "FR550",
+    "status": "delayed",
+    "scheduledDep": "2025-08-15T14:30:00Z",
+    "scheduledArr": "2025-08-15T17:00:00Z",
+    "lastUpdatedUtc": "2025-08-15T14:00:00Z"
+  }
+]

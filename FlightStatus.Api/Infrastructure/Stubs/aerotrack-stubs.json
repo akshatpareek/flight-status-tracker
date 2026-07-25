@@ -1,0 +1,50 @@
+[
+  {
+    "flightNumber": "BA493",
+    "rawStatus": "DELAYED",
+    "scheduledDeparture": "2025-08-15T06:00:00Z",
+    "scheduledArrival": "2025-08-15T08:30:00Z",
+    "actualDeparture": "2025-08-15T06:45:00Z",
+    "actualArrival": null,
+    "terminal": "T5",
+    "gate": "B22",
+    "delayReason": "Late inbound aircraft",
+    "lastUpdatedUtc": "2025-08-15T05:50:00Z"
+  },
+  {
+    "flightNumber": "LH100",
+    "rawStatus": "ON_TIME",
+    "scheduledDeparture": "2025-08-15T07:00:00Z",
+    "scheduledArrival": "2025-08-15T09:15:00Z",
+    "actualDeparture": "2025-08-15T07:05:00Z",
+    "actualArrival": null,
+    "terminal": "T1",
+    "gate": "A12",
+    "delayReason": null,
+    "lastUpdatedUtc": "2025-08-15T06:55:00Z"
+  },
+  {
+    "flightNumber": "EK202",
+    "rawStatus": "CANCELLED",
+    "scheduledDeparture": "2025-08-15T10:00:00Z",
+    "scheduledArrival": "2025-08-15T18:30:00Z",
+    "actualDeparture": null,
+    "actualArrival": null,
+    "terminal": "T3",
+    "gate": null,
+    "delayReason": "Operational disruption",
+    "lastUpdatedUtc": "2025-08-15T08:00:00Z"
+  },
+  {
+    "flightNumber": "TK801",
+    "rawStatus": "DIVERTED",
+    "scheduledDeparture": "2025-08-15T12:00:00Z",
+    "scheduledArrival": "2025-08-15T15:30:00Z",
+    "actualDeparture": "2025-08-15T12:10:00Z",
+    "actualArrival": "2025-08-15T16:00:00Z",
+    "terminal": "T2",
+    "gate": "C08",
+    "delayReason": "Weather diversion",
+    "lastUpdatedUtc": "2025-08-15T14:00:00Z"
+  }
+]
