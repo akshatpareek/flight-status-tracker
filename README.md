@@ -16,7 +16,22 @@ The application is built completely offline, utilizing embedded JSON mock data s
 
 ## 🚀 Getting Started (Quick Run)
 
-### Step 1: Trust your local .NET HTTPS Dev Certificate (Required)
+### Prerequisites
+* **.NET SDK** (.NET 8.0 or .NET 9.0 installed on your local machine)
+* **Git** installed
+
+---
+
+### Step 1: Clone and Navigate to the Project
+Clone the repository and enter the directory:
+```powershell
+git clone <your-repository-url>
+cd flight-status-tracker
+```
+
+---
+
+### Step 2: Trust your local .NET HTTPS Dev Certificate (Required)
 Since the frontend communicates with the backend over **HTTPS** (`https://localhost:7262`), your browser will block requests unless your machine trusts the local .NET development certificate.
 
 Run this command in your terminal:
@@ -26,21 +41,21 @@ dotnet dev-certs https --trust
 
 ---
 
-### Step 2: Run the Backend API
+### Step 3: Run the Backend API
 Start the backend using the default HTTPS launch profile:
-1. Navigate to the repository root directory.
+1. Ensure you are in the repository root directory.
 2. Run the project:
    ```powershell
    dotnet run --project FlightStatus.Api --launch-profile https
    ```
-3. Once running, open `https://localhost:7262/` in your browser. You will see a custom dark-themed API landing page confirming the service is live.
+3. Once running, open `https://localhost:7262/` in your browser. You will see the API landing page confirming the service is live.
 
 ---
 
-### Step 3: Run the Frontend UI
+### Step 4: Run the Frontend UI
 1. Navigate to the `flight-status-ui/` directory.
 2. Open `index.html` directly in any modern browser (double-click the file).
-3. Check the status of a flight!
+3. Start checking flight statuses!
 
 ---
 
