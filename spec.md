@@ -9,7 +9,7 @@ This document defines the system design, data models, business rules, interface 
 # 1. Unified Status Enum
 
 ```csharp
-public enum FlightStatus
+public enum EnumFlightStatus
 {
     OnTime,    // Departure or arrival within 15 minutes of schedule
     Delayed,   // Departure or arrival pushed beyond 15 minutes
@@ -21,7 +21,7 @@ public enum FlightStatus
 
 ### Serialization Rules
 
-`FlightStatus` must always be serialized as a string in API responses.
+`EnumFlightStatus` must always be serialized as a string in API responses.
 
 Examples:
 
@@ -39,7 +39,7 @@ Numeric enum serialization is not permitted.
 
 # 2. Data Models
 
-## 2.1 FlightStatusResult
+## 2.1 FlightStatusResponse
 
 Returned to the frontend by the API.
 
@@ -48,13 +48,13 @@ Returned to the frontend by the API.
 - Must always be returned.
 - Must never be `null`.
 - Business logic failures must not throw exceptions.
-- Unknown results should be represented using `FlightStatus.Unknown`.
+- Unknown results should be represented using `EnumFlightStatus.Unknown`.
 
 | Field | Type | Nullable | Description |
 |---------|---------|---------|---------|
 | flightNumber | string | No | IATA flight code (e.g. BA493) |
 | date | DateOnly | No | Scheduled departure date |
-| status | FlightStatus | No | Unified status value |
+| status | EnumFlightStatus | No | Unified status value |
 | scheduledDeparture | DateTimeOffset | No | Scheduled departure in UTC |
 | scheduledArrival | DateTimeOffset | No | Scheduled arrival in UTC |
 | actualDeparture | DateTimeOffset? | Yes | Actual departure in UTC |
@@ -92,7 +92,7 @@ Internal intermediate model produced by providers after normalization.
 |---------|---------|---------|
 | flightNumber | string | No |
 | date | DateOnly | No |
-| status | FlightStatus | No |
+| status | EnumFlightStatus | No |
 | scheduledDeparture | DateTimeOffset | No |
 | scheduledArrival | DateTimeOffset | No |
 | actualDeparture | DateTimeOffset? | Yes |
@@ -128,7 +128,7 @@ Raw provider model used by AeroTrack.
 
 ### Status Mapping
 
-| AeroTrack Value | FlightStatus |
+| AeroTrack Value | EnumFlightStatus |
 |-----------------|-------------|
 | ON_TIME | OnTime |
 | DELAYED | Delayed |
@@ -157,7 +157,7 @@ Raw provider model used by QuickFlight.
 
 ### Status Mapping
 
-| QuickFlight Value | FlightStatus |
+| QuickFlight Value | EnumFlightStatus |
 |------------------|-------------|
 | on-time | OnTime |
 | delayed | Delayed |
@@ -220,8 +220,10 @@ public interface IFlightMergeService
     /// Merges provider responses into a single result.
     /// Never returns null.
     /// </summary>
-    FlightStatusResult Merge(
-        IEnumerable<NormalisedFlightData?> providerResults);
+    FlightStatusResponse Merge(
+        IEnumerable<NormalisedFlightData?> providerResults,
+        string flightNumber,
+        DateOnly flightDate);
 }
 ```
 
@@ -344,10 +346,10 @@ Validation occurs before any provider call.
 
 | Condition | HTTP Status | Response |
 |------------|------------|-----------|
-| flightNumber missing or whitespace | 400 | `{ "error": "flightNumber and date are required." }` |
-| date missing or whitespace | 400 | `{ "error": "flightNumber and date are required." }` |
-| date format invalid | 400 | `{ "error": "date must be in yyyy-MM-dd format." }` |
-| unexpected exception | 500 | `{ "error": "An unexpected error occurred." }` |
+| flightNumber missing or whitespace | 400 | `{ "traceId": "...", "statusCode": 400, "message": "flightNumber is required." }` |
+| date missing or whitespace | 400 | `{ "traceId": "...", "statusCode": 400, "message": "date is required and must be a valid date (yyyy-MM-dd)." }` |
+| date format invalid | 400 | `{ "traceId": "...", "statusCode": 400, "message": "date is required and must be a valid date (yyyy-MM-dd)." }` |
+| unexpected exception | 500 | `{ "traceId": "...", "statusCode": 500, "message": "An unexpected error occurred. Please try again later." }` |
 
 ---
 
@@ -489,7 +491,7 @@ flight-status/
 | Pattern | Applied In | Rationale |
 |----------|------------|-----------|
 | Strategy | IFlightStatusProvider implementations | Add providers without changing merge logic |
-| Result Object | FlightStatusResult | Consistent API output |
+| Result Object | FlightStatusResponse | Consistent API output |
 | Pure Static Normaliser | FlightStatusNormaliser | Simple, deterministic testing |
 | Dependency Inversion | API layer → interfaces | No provider coupling |
 
