@@ -579,6 +579,5 @@ The following features are explicitly excluded:
 - Authorization
 - Databases
 - Persistent storage
-- Swagger/OpenAPI UI
 - External JavaScript libraries
 - CSS frameworks

@@ -48,7 +48,7 @@ Start the backend using the default HTTPS launch profile:
    ```powershell
    dotnet run --project FlightStatus.Api --launch-profile https
    ```
-3. Once running, open `https://localhost:7262/` in your browser. You will see the API landing page confirming the service is live.
+3. Once running, open `https://localhost:7262/` in your browser. You will see the Swagger OpenAPI UI page confirming the service is live and listing the endpoints.
 
 ---
 

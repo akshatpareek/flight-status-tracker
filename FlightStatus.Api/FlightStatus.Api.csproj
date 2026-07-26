@@ -9,4 +9,7 @@
 		<EmbeddedResource Include="Infrastructure\Stubs\aerotrack-stubs.json" />
 		<EmbeddedResource Include="Infrastructure\Stubs\quickflight-stubs.json" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
 </Project>

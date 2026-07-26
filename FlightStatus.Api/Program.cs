@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IFlightStatusProvider, AeroTrackProvider>();
 builder.Services.AddSingleton<IFlightStatusProvider, QuickFlightProvider>();
@@ -43,11 +45,15 @@ var app = builder.Build();
 
 app.UseExceptionHandler();
 app.UseCors();
-app.UseDefaultFiles();
-app.UseStaticFiles();
-app.MapFlightEndpoints();
 
-app.MapFallbackToFile("index.html");
+app.UseSwagger();
+app.UseSwaggerUI(swaggerUiOptions =>
+{
+    swaggerUiOptions.SwaggerEndpoint("/swagger/v1/swagger.json", "Flight Status API v1");
+    swaggerUiOptions.RoutePrefix = string.Empty;
+});
+
+app.MapFlightEndpoints();
 app.Run();
 
 public partial class Program { }
